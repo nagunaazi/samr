@@ -1,0 +1,185 @@
+{% load static %}
+{% url 'dash' as dashboard %}
+{% url 'order_list' as order_copy %}
+{% url 'copies' as copies %}
+{% url 'billing' as billing %}
+{% url 'order_list_billing' as order_billing %}
+{% url 'ledger' as ledger %}
+{% url 'order_list_outstanding' as order_ledger %}
+{% url 'userprofile' as userprofile %}
+{% url 'grievance' as grievance %}
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-2">
+    <!-- Brand Logo -->
+    <a href="/dash/" class="brand-link">
+      <img src='{% static "dist/img/brand-logo.png"  %}' alt="Samriddhi" class="">
+      <span class="brand-text font-weight-light"><img src='{% static "dist/img/logo.png"  %}' alt="Logo" class="img-fluid" style="width:85%;"></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">  
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="/dash" class="nav-link {% if request.path == dashboard %} active {%endif%}">
+			        <i class="nav-icon fas fa-fw fa-chart-area" aria-hidden="true"></i>
+
+              <i class=" fas fa-bar-chart"></i>
+              <p>
+                Dashboard {{copy}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+              <a href="/dash/number-copies" class="nav-link {% if request.path == copies %} active {%endif%}">
+            {% else %}
+              <a href="/dash/order_list_copy" class="nav-link {% if request.path == order_copy %} active {%endif%}">
+            {% endif %}
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Todays Copies
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+            <a href="/dash/billing/" class="nav-link {% if request.path == billing %} active {%endif%}">
+            {% else %}
+            <a href="/dash/order_list_billing/" class="nav-link {% if request.path == order_billing %} active {%endif%}">
+            {% endif %}
+              <i class="nav-icon fas fa-file-invoice"></i>
+              <p>
+                Billing
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+            <a href="/dash/ledger/" class="nav-link {% if request.path == ledger %} active {%endif%}">
+            {% else %}
+            <a href="/dash/order_list_outstanding/" class="nav-link {% if request.path == order_ledger %} active {%endif%}">
+            {% endif %}
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Ledger
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-hands"></i>
+              <p>
+                Benefits
+              </p>
+            </a>
+            
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Scheme
+              </p>
+            </a>
+          
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="/dash/grievance" class="nav-link  {% if request.path == grievance %} active {%endif%}">
+              <i class="nav-icon fa fa-comment-alt"></i>
+              <p>
+                Grievance
+                <!-- <i class="fas fa-angle-left right"></i> -->
+              </p>
+            </a>
+           
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Special Days
+              </p>
+            </a>
+
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Sub Agent/Hawker
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Language
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                DB Representative
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+               Product Paging
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{% url 'misreport'%}" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+               MIS Report
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview {% if request.path == userprofile %} menu-open {%endif%}">
+            <a href="#" class="nav-link {% if request.path == userprofile %} active {%endif%}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile
+                <i class="fas fa-angle-right right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+             
+              <li class="nav-item">
+                <a href="/dash/userprofile/" class="nav-link {% if request.path == userprofile %} active {%endif%}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Change Password</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+        
+       </ul>
+      </nav>
+	 
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+	<div class="text-center log-out-btn"> 
+		<a href="/logout" class="">Log Out</a>
+	</div>
+  </aside>

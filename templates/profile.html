@@ -1,0 +1,597 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Profile</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <section class="content profile-title">
+        <div class="container-fluid">
+            <!-- Main row -->
+            <div class="row">
+              <div class="col-12">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Profile Details</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                          class="fas fa-minus"></i></button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                          class="fas fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Agency Name</label>
+                          <input type="text" class="form-control first_name" value="{{data.usermaster.0.fields.first_name}}" placeholder="Agency Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>Agency Code</label>
+                          <input type="text" class="form-control BpCode" value="{{data.usercrm.results.0.BpCode}}"  placeholder="Agency Code">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>Agent Name</label>
+                          <input type="text" class="form-control Owner" value="{{data.usercrm.results.0.Owner}}" placeholder="Agent Name">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body -->
+
+                </div>
+              </div>
+
+              <!----Address--->
+              <div class="col-12">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Address</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                          class="fas fa-minus"></i></button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                          class="fas fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Flat/House No.</label>
+                          <input type="text" class="form-control Addr" value="{{data.usercrm.results.0.Addr}}"  placeholder="Flat/House No.">
+                          <!-- <textarea class="form-control" rows="2" placeholder="Flat/House No."></textarea> -->
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Street Name</label>
+                          <input type="text" class="form-control street_name" value="" placeholder="Street Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          {% comment %} <label>City</label>
+                          <select class="form-control select2">
+                            <option selected="City">City</option>
+                            <option>Jaipur</option>
+                            <option>Kota</option>
+                            <option>Udaipur</option>
+                          </select> {% endcomment %}
+                           <label>City</label>
+                          <input type="text" class="form-control Unit" value="{{data.usercrm.results.0.Unit}}" placeholder="City Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          {% comment %} <label>State</label>
+                          <select class="form-control select2 state">
+                            <option selected="State">State</option>
+                            <option>Rajasthan</option>
+                            <option>Madhyapradesh</option>
+                            <option>UP</option>
+                          </select> {% endcomment %}
+                           <label>State</label>
+                          <input type="text" class="form-control State" value="{{data.usercrm.results.0.State}}" placeholder="State Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Pin Code</label>
+                          <input type="text" class="form-control Pincode"  value="{{data.usercrm.results.0.Pincode}}" placeholder="Pin Code">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body -->
+
+                </div>
+              </div>
+
+
+              <!----Personal Detail--->
+              <div class="col-12">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Personal Detail</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                          class="fas fa-minus"></i></button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                          class="fas fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Aadhar No.</label>
+                          <input type="text" value="{{data.usercrm.results.0.Aadhar}}" class="form-control Aadhar" placeholder="Aadhar No.">
+                          <!-- <textarea class="form-control" rows="2" placeholder="Flat/House No."></textarea> -->
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Pan Card No.</label>
+                          <input type="text" value="{{data.usercrm.results.0.Pan}}" class="form-control Pan" placeholder="Pan Card No.">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Mobile No.</label>
+                          <input type="text" value="{{data.usercrm.results.0.Mobile1}}" class="form-control Mobile1" placeholder="Mobile No.">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>Agent DOB</label>
+                        <div class="input-group">
+                          <input type="text" value="{{data.usercrm.results.0.Dob}}" class="form-control datepicker Dob" id="datepicker" placeholder="Agent DOB">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>Marital Status</label>
+                          <select class="form-control select2 MaritalStatus" style="width: 100%;">
+                            <option value="" selected="selected">Marital Status</option>
+                            <option value="Married" {% if data.usercrm.results.0.MaritalStatus == 'Married' %} selected {%endif%}>Married</option>
+                            <option value="Unmarried" {% if data.usercrm.results.0.MaritalStatus == 'Unmarried' %} selected {%endif%} >Unmarried</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <!-- textarea -->
+                        <div class="form-group">
+                          <label>Spouse Name</label>
+                          <input type="text" class="form-control WIFESet_Name" value="{{data.usercrm.results.0.WIFESet.0.Name}}"  placeholder="Spouse Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>Spouse DOB</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control datepicker WIFESet_Dob" id="datepicker" value="{{data.usercrm.results.0.WIFESet.0.Dob}}" placeholder="Spouse DOB">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>Marriage Anniversary Date</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control datepicker MarrAnni" value="{{data.usercrm.results.0.MarrAnni}}" id="datepicker"
+                            placeholder="Marriage Anniversary Date">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>No. of Children</label>
+                          <select class="form-control select2 NoChild" style="width: 100%;">
+                            <option value="0">No. of Children {{data.usercrm.results.0.NoChild|slice:"1:"}}</option>
+                            {% for o in "123456789"|make_list %}
+                            <option value="0{{o}}" {% if data.usercrm.results.0.NoChild|slice:"1:" == o %} selected {%endif%} >{{o}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+              <!----Child Detail--->
+              <div class="col-12">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Child Detail</h3>
+
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                          class="fas fa-minus"></i></button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                          class="fas fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body child-parent">
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              </div>
+              <!----Agent Detail--->
+              <div class="col-12">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Agent Detail</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
+                          class="fas fa-minus"></i></button>
+                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                          class="fas fa-remove"></i></button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label>Agent Father Name</label>
+                          <input type="text" class="form-control FATSet_Name"  value="{{data.usercrm.results.0.FATSet.0.Name}}" placeholder="Agent Father Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>Agent Father DOB</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control datepicker FATSet_Dob"  value="{{data.usercrm.results.0.FATSet.0.Dob}}" id="datepicker2" placeholder="Agent Father DOB">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <label>Agent Mother Name</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control MOTSet_Name" value="{{data.usercrm.results.0.MOTSet.0.Name}}" placeholder="Agent Mother Name">
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <label>Agent Mother DOB</label>
+                        <div class="input-group">
+                          <input type="text" class="form-control datepicker MOTSet_Dob" value="{{data.usercrm.results.0.MOTSet.0.Dob}}" id="datepicker" placeholder="Agent Mother DOB">
+                          <div class="input-group-append">
+                            <span class="input-group-text">
+                              <i class="far fa-calendar-alt"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="bro-div">
+
+                    </div>
+                    <div id="sis-div">
+
+                    </div>             
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <button type="submit" class="btn theme-btn submit_form_btn">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+
+                </div>
+              </div>
+
+          </form>
+        </div>
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% include "includes/footer.html" %}
+<script>
+
+
+  $(function(){
+
+    var kids = {{data.usercrm.results.0.KIDSet|safe}}
+
+    for (i = 0; i < 5; i++) {
+      if(kids[i]){
+        var name = kids[i].Name
+        var dob = kids[i].Dob
+        var genm = kids[i].Gender=="Male"?"selected":""
+        var genf = kids[i].Gender=="Female"?"selected":""
+        var edu = kids[i].Education
+      }else{
+        var name = ''
+        var dob = ''
+        var genm = ''
+        var genf = ''
+        var edu = ''
+      }
+      var row = '<div class="row child-row">'
+          row +=  '<div class="col-sm-4">'
+          row +=  '<div class="form-group">'
+          row +=  '<label>Child Name</label>'
+          row +=  '<input type="text" value="'+name+'" class="form-control kids_name'+i+'" placeholder="Child Name">'
+          row +=  '</div></div>'
+          row +=  '<div class="col-sm-4">'
+          row +=  '<div class="form-group">'
+          row +=  '<label>Select Gender</label>'
+          row +=  '<select class="form-control select2 kids_gender'+i+'" style="width: 100%;">'
+          row +=  '<option value="">Select Gender </option>'
+          row +=  '<option value="Male"' +genm+ '>Male</option>'
+          row +=  '<option value="Female"' +genf+ '>Female</option>'
+          row +=  '</select></div></div>'
+          row +=  '<div class="col-sm-4">'
+          row +=  '<label>Child DOB</label>'
+          row +=  '<div class="input-group">'
+          row +=  '<input type="text" value="'+dob+'" class="form-control datepicker kids_dob'+i+'" placeholder="Child DOB">'
+          row +=  '<div class="input-group-append">'
+          row +=  '<span class="input-group-text">'
+          row +=  '<i class="far fa-calendar-alt"></i>'
+          row +=  '</span></div></div></div>'
+          row +=  '<div class="col-sm-4">'
+          row +=  '<label>Child Education</label>'
+          row +=  '<div class="form-group">'
+          row +=  '<input type="text" class="form-control kids_edu'+i+'" value="'+edu+'" placeholder="Child Education"></div></div></div><hr>' 
+      $(".child-parent").append(row)
+    }
+
+    var sis_sets = {{data.usercrm.results.0.SISSet|safe}}
+    for (x = 0; x < 2; x++) {
+      if(sis_sets[x]){
+        var name = sis_sets[x].Name
+        var dob = sis_sets[x].Dob
+      }else{
+        var name = ''
+        var dob = ''
+      }
+      var row_s = '<div class="row bro-row">'
+        row_s += '<div class="col-sm-8 bro-copy">'
+        row_s += '<div class="row">'
+        row_s +=  '<div class="col-sm-6">'
+        row_s += '<div class="form-group">'
+        row_s += '<label>Agent Sister Name</label>'
+        row_s += '<input type="text" value="'+name+'" class="form-control datepicker sis_name'+x+'" placeholder="Agent Sister Name"></div></div>'
+        row_s += '<div class="col-sm-6">'
+        row_s += '<label>Agent Sister DOB</label>'
+        row_s += '<div class="input-group">'
+        row_s += '<input type="text" value="'+dob+'" class="form-control datepicker sis_dob'+x+'" id="datepicker" placeholder="Agent Sister DOB">'
+        row_s += '<div class="input-group-append">'
+        row_s += '<span class="input-group-text">'
+        row_s += '<i class="far fa-calendar-alt"></i>'
+        row_s += '</span></div></div></div></div></div></div>' 
+      $("#sis-div").append(row_s)
+    }
+
+    var bro_sets = {{data.usercrm.results.0.BROSet|safe}}
+    for (e = 0; e < 2; e++) {
+      if(bro_sets[e]){
+        var name = bro_sets[e].Name
+        var dob = bro_sets[e].Dob
+      }else{
+        var name = ''
+        var dob = ''
+      }
+      var row_b = '<div class="row bro-row">'
+        row_b += '<div class="col-sm-8 bro-copy">'
+        row_b += '<div class="row">'
+        row_b +=  '<div class="col-sm-6">'
+        row_b += '<div class="form-group">'
+        row_b += '<label>Agent Brother Name</label>'
+        row_b += '<input type="text" value="'+name+'" class="form-control bro_name'+e+'" placeholder="Agent Brother Name"></div></div>'
+        row_b += '<div class="col-sm-6">'
+        row_b += '<label>Agent Brother DOB</label>'
+        row_b += '<div class="input-group">'
+        row_b += '<input type="text" value="'+dob+'" class="form-control datepicker bro_dob'+e+'" id="datepicker" placeholder="Agent Brother DOB">'
+        row_b += '<div class="input-group-append">'
+        row_b += '<span class="input-group-text">'
+        row_b += '<i class="far fa-calendar-alt"></i>'
+        row_b += '</span></div></div></div></div></div></div>' 
+      $("#bro-div").append(row_b)
+    }
+    $(".datepicker").datepicker({ dateFormat: 'dd-MM-yy' });
+  })
+
+  $(".submit_form_btn").click(function(){
+    $('.loader-div').show()
+    var WIFESet_Dob = $(".WIFESet_Dob").val()
+    if(WIFESet_Dob){
+       WIFESet_Dob = new Date(WIFESet_Dob).getTime().toString()
+    }else{
+      WIFESet_Dob = ""
+    }
+
+    var Dob = $(".Dob").val()
+    if(Dob){
+       Dob = new Date(Dob).getTime().toString()
+    }else{
+      Dob = ""
+    }
+
+    var MarrAnni = $(".MarrAnni").val()
+    if(MarrAnni){
+       MarrAnni = new Date(MarrAnni).getTime().toString()
+    }else{
+      MarrAnni = ""
+    }
+
+    var MOTSet_Dob = $(".MOTSet_Dob").val()
+    if(MOTSet_Dob){
+       MOTSet_Dob = new Date(MOTSet_Dob).getTime().toString()
+    }else{
+      MOTSet_Dob = ""
+    }
+
+
+    var first_name = $(".first_name").val();
+    var BpCode = $(".BpCode").val();
+    var Owner = $(".Owner").val();
+    var Addr = $(".Addr").val();
+    var street_name = $(".street_name").val();
+    var Unit = $(".Unit").val();
+    var State = $(".State").val();
+    var Pincode = $(".Pincode").val();
+    var Aadhar = $(".Aadhar").val();
+    var Pan = $(".Pan").val();
+    var Mobile1 = $(".Mobile1").val();
+    var Dob = Dob;
+    var MaritalStatus = $(".MaritalStatus").val();
+    var WIFESet_Name = $(".WIFESet_Name").val();
+    var WIFESet_Dob = WIFESet_Dob
+    var MarrAnni = MarrAnni;
+    var NoChild = $(".NoChild").val();
+    var MOTSet_Name = $(".MOTSet_Name").val();
+    var MOTSet_Dob = MOTSet_Dob
+
+    var kid_data = []
+    for(i=0; i<5; i++){
+      var kids_dob = $(".kids_dob"+i).val()
+      if(kids_dob){
+        kids_dob = new Date(kids_dob).getTime().toString()
+      }else{
+        kids_dob = ""
+      }
+      var kids_name = $(".kids_name"+i).val()
+      var kids_gender = $(".kids_gender"+i).val()
+      var kids_dob = kids_dob
+      var kids_edu = $(".kids_edu"+i).val()
+      var data = {'Name':kids_name,'Dob':kids_dob,'Education':kids_edu,'Gender':kids_gender}
+      kid_data.push(data)
+    }
+
+    var bro_data = []
+    for(i=0; i<2; i++){
+      var bro_dob = $(".bro_dob"+i).val()
+      if(bro_dob){
+        bro_dob = new Date(bro_dob).getTime().toString()
+      }else{
+        bro_dob = ""
+      }
+      var bro_name = $(".bro_name"+i).val()
+      var bro_dob = bro_dob
+      var data_bro = {'Name':bro_name,'Dob':bro_dob}
+      bro_data.push(data_bro)
+    }
+
+    var sis_data = []
+    for(i=0; i<2; i++){
+      var sis_dob = $(".sis_dob"+i).val()
+      if(sis_dob){
+        sis_dob = new Date(sis_dob).getTime().toString()
+      }else{
+        sis_dob = ""
+      }
+      var sis_name = $(".sis_name"+i).val()
+      var sis_dob = sis_dob
+      var data_sis = {'Name':sis_name,'Dob':sis_dob}
+      sis_data.push(data_sis)
+    }
+    
+    let data_v = {
+      first_name:first_name,
+      BpCode:BpCode,
+      Owner:Owner,
+      Addr:Addr,
+      street_name:street_name,
+      Unit:Unit,
+      State:State,
+      Pincode:Pincode,
+      Aadhar:Aadhar,
+      Pan:Pan,
+      Mobile1:Mobile1,
+      Dob:Dob,
+      MaritalStatus:MaritalStatus,
+      MarrAnni:MarrAnni,
+      NoChild:NoChild,
+      WIFESet:[{'Name':WIFESet_Name,'Dob':WIFESet_Dob}],
+      KIDSet:kid_data,
+      MOTSet:[{'Name':MOTSet_Name,'Dob':MOTSet_Dob}],
+      BROSet:bro_data,
+      SISSet:sis_data
+    };
+    var data = {}
+
+    data.csrfmiddlewaretoken = '{{ csrf_token }}';
+    data.data = JSON.stringify(data_v)
+    // console.log(data)
+    $.ajax({
+        type: "POST",
+        url: "/dash/userprofile-update/",
+        data: data, 
+        success: function (resp) {
+          var data = resp
+          console.log(data.reply)
+          if(data.status_code == 1){
+            toastr.success(data.reply,{timeOut: 800000})
+          }else{
+            toastr.error(data.reply,{timeOut: 800000})
+          }
+          $('.loader-div').hide()
+        }
+      });
+  })
+
+
+
+  
+</script>

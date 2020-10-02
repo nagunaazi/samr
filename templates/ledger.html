@@ -1,0 +1,192 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Ledger</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+              <li class="breadcrumb-item active">Ledger</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+        <!-- Main row -->
+        <div class="row">
+           <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <!--<div class="card-header">
+                <h3 class="card-title">General Elements</h3>
+              </div>-->
+              <!-- /.card-header -->
+              <div class="card-body width-500">
+
+
+
+              <div class="row">
+              <div class="col-12 col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control float-right" id="reservation">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+
+              		  
+              <table id="ledger_data" class="table dark_head table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Time Date</th>
+                  <th>Tran Type</th>
+                  <th>Tran Amount</th>
+                  <th>Tran Desc</th>
+                  <th>Doc Number</th>
+                </tr>
+              </thead>
+                <tbody>
+                
+                {% for da in data.results.0.TRNSet %}
+                <tr>
+                  <td>
+                  {{da.Budat}}</td>
+                  <td>{{da.Blart}}</td>
+                  <td>{{da.Dmshb|floatformat:2}}</td>
+                  <td>{{da.Bezei}}</td>
+                  <td>{{da.Xblnr}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+
+              </div>
+              </div>
+
+
+
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+           
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include "includes/footer.html" %}
+  <script>
+      $('#ledger_data').DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              'pdf'
+          ],
+           "aoColumns": [
+                { "sType": "date-uk" },
+                null,
+                null,
+                null,
+                null
+            ]
+      });
+
+        //Date range picker
+
+    var start_date_lo = moment().subtract(95, 'days')
+    var start_date_dd = "01-04-"+start_date_lo.format('YYYY')
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    $('#reservation').daterangepicker({
+      maxDate: today,
+      endDate: today,
+      startDate: start_date_dd,
+      locale: {
+          format: 'DD-MM-YYYY'
+      }
+    })
+
+    $(".applyBtn").click(function(){
+      var date_value = $("#reservation").val() 
+      var data_dd = date_value.split(" - ")
+      var start = data_dd[0]
+      var end = data_dd[1]
+      var start_date =  moment(start,'DD/MM/YYYY').format('YYYY-MM-DD');
+      var end_date = moment(end,'DD/MM/YYYY').format('YYYY-MM-DD');
+
+      var data_v = {}
+      var BPCODE = "{{request.GET.s}}"
+      if(BPCODE){
+        BPCODE = BPCODE
+      }else{
+        BPCODE = "{{ user.username }}"
+      }
+      data_v.BPCODE = BPCODE
+      data_v.fromdt = start_date;
+      data_v.todt = end_date;
+      data_v.csrfmiddlewaretoken = '{{ csrf_token }}';
+      call_request(data_v)
+
+    })
+
+    function call_request(data_v){
+      $('.loader-div').show()
+      $('#ledger_data').dataTable().fnClearTable();
+      $('#ledger_data').dataTable().fnDraw();
+      $('#ledger_data').dataTable().fnDestroy();
+      $.ajax({
+        type: "POST",
+        url: "/dash/ledger/",
+        data: data_v,
+        success: function (resp) {
+          $('#ledger_data tbody tr').remove();
+          resp['data'].forEach(function(item){
+            var day = moment(item.start).format('DD-MM-YYYY');
+            $('#ledger_data').append('<tr><td>'+item.Budat+'</td><td>'+item.Blart+'</td><td>'+item.Dmshb+'</td><td>'+item.Bezei+'</td><td>'+item.Xblnr+'</td></tr>');
+          })
+          $('#ledger_data').DataTable( {
+              dom: 'Bfrtip',
+              buttons: [
+                  'pdf'
+              ],
+              "aoColumns": [
+                { "sType": "date-uk" },
+                null,
+                null,
+                null,
+                null
+            ]
+          } );
+          $('.loader-div').hide()
+        }
+      });
+    }
+  </script>

@@ -1,0 +1,646 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Number Of Copies</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+              <li class="breadcrumb-item active">Number Of Copies</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+        <!-- Main row -->
+       <div class="row">
+          <!-- /.col -->
+          <div class="col-md-12">
+            {% if request.GET.n %}
+            <div class="row">
+              <div class="col-12 col-md-12">
+                <h6 class="mt-2 f-20">
+                  {% for url in request.session.url_copy %}
+                    <a href="{{url.url}}">{{url.name}}</a> <i class="fas fa-arrow-right"></i>
+                  {% endfor %}
+                  {{request.GET.n}}
+                </h6>
+              </div>
+            </div>
+            {% endif %}
+            <div class="card card-primary">
+              <div class="card-body p-0">
+                <!-- THE CALENDAR -->
+                <div class="col-md-12">
+                <br>
+                <div class="row">
+                  <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-6">
+                  {% if request.GET.n %}
+                    <h3 style="color: #ed2324;">{{request.GET.n}} | {{request.GET.s}}</h3>
+                  {% endif %}
+                  </div>
+                  <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select id="edi" class="common-select custom-select" style="width: 100%;">
+                      <option value="">All Editions</option>
+                      {% for lis in lis_res.0.NavEdtnSet.results %}
+                          <option value="{{lis.Pva}}">{{lis.EditionName}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <select id="AgType" class="common-select custom-select" style="width: 100%;">
+                      <option value="" >Total Copies</option>
+                      {% for lis in lis_res.0.NavSubagentSet.results %}
+                          <option value="{{lis.ShipToParty}}">{{lis.CityName}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  {% comment %} <div class="col-6 col-sm-3 col-md-3 col-lg-3 col-xl-2">
+                    <a href="/dash/csv-download?bpcode=10307&fromdt=2020-04-01&todt=2020-05-05" class="btn theme-btn">EXCEL</a>
+                  </div> {% endcomment %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="col-md-12">
+                    <div id="calendar"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-md-12">
+                       <div id="calendar_past"></div>
+                       <br>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6"></div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                              </span>
+                            </div>
+                            <input type="text" class="form-control float-right" id="reservation">
+                          </div>
+                          <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<!-- Modal -->
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog" id="copy-model">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Circulation Copies</h4>
+        <button type="button" class="close model_close_report" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <table id="copies_repot_idvi" style="text-align:center;" class="dark_head table table-striped table-bordered dataTable no-footer">
+                <thead>
+                <tr>
+                  <th colspan="2">{{user.first_name}}</th>
+                </tr>
+                <tr>
+                  <th>Date</th>
+                  <th>No. of copies</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{% include "includes/footer.html" %}
+<script> 
+    var cal_data = {{data|safe}}
+    var start_date = '';
+    var end_date = '';
+    var edi = '*';
+    //var AgType = {{user.username}};
+    $('#edi').change(function(){
+        var edi = $('#edi').val()
+        var AgType = $('#AgType').val()
+        if(AgType){
+          var ad_d = 'SA'
+          AgType = AgType;
+        }else{
+          var ad_d = 'AG'
+          var BPCODE_R = "{{request.GET.s}}"
+        if(BPCODE_R){
+          BPCODE_R = BPCODE_R
+        }else{
+          BPCODE_R = "{{ user.username }}"
+        }
+          AgType = BPCODE_R;
+        }
+        let data_v = {};
+        data_v.AgType = ad_d;
+        data_v.edi = edi;
+        data_v.fromdt = start_date;
+        data_v.todt = end_date;
+        data_v.BPCODE = AgType
+        //console.log(data_v)
+        $('.loader-div').show()
+        call_request_filter(data_v)
+    })
+    $('#AgType').change(function(){
+        var AgType = $('#AgType').val()
+        if(AgType){
+          var ad_d = 'SA'
+        }else{
+          var ad_d = 'AG'
+        var BPCODE_R = "{{request.GET.s}}"
+        if(BPCODE_R){
+          BPCODE_R = BPCODE_R
+        }else{
+          BPCODE_R = "{{ user.username }}"
+        }
+          AgType = BPCODE_R;
+        }
+        var edi = $('#edi').val()
+        let data_v = {};
+        data_v.AgType = ad_d;
+        data_v.edi = edi;
+        data_v.fromdt = start_date;
+        data_v.todt = end_date;
+        data_v.BPCODE = AgType
+        //console.log(data_v)
+        $('.loader-div').show()
+        call_request_filter(data_v)
+    })
+    //Money Euro
+
+    //Date range picker
+    var start_date_lo = moment().subtract(95, 'days')
+    var start_date_dd = "01-04-"+start_date_lo.format('YYYY')
+    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    $('#reservation').daterangepicker({
+      maxDate: today,
+      endDate: today,
+      startDate: start_date_dd,
+      locale: {
+          format: 'DD-MM-YYYY'
+      }
+    })
+
+    $(".applyBtn").click(function(){
+      var date_value = $("#reservation").val() 
+      var data_dd = date_value.split(" - ")
+      var start = data_dd[0]
+      var end = data_dd[1]
+      var start_date =  moment(start,'DD/MM/YYYY').format('YYYY-MM-DD');
+      var end_date = moment(end,'DD/MM/YYYY').format('YYYY-MM-DD');
+      let data_v = {};
+      var AgType = $('#AgType').val()
+      if(AgType){
+        var ad_d = 'SA'
+      }else{
+        var ad_d = 'AG'
+        var BPCODE_R = "{{request.GET.s}}"
+        if(BPCODE_R){
+          BPCODE_R = BPCODE_R
+        }else{
+          BPCODE_R = "{{ user.username }}"
+        }
+        AgType = BPCODE_R;
+      }
+      var edi = $('#edi').val()
+      data_v.AgType = ad_d;
+      data_v.edi = edi;
+      data_v.fromdt = start_date;
+      data_v.todt = end_date;
+      data_v.BPCODE = AgType
+      //console.log(data_v)
+      $('.loader-div').show()
+      call_request(data_v)
+    })
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    $('.model_close_report').click(function(){
+      $('#copies_repot_idvi').dataTable().fnClearTable();
+      $('#copies_repot_idvi').dataTable().fnDraw();
+      $('#copies_repot_idvi').dataTable().fnDestroy();
+      $('#myModal').hide()
+    })
+
+    function call_request(data_v){
+      data_v.csrfmiddlewaretoken = '{{ csrf_token }}';
+      $.ajax({
+        type: "POST",
+        url: "/dash/number-copies/",
+        data: data_v,
+        success: function (resp) {
+          $('#myModal').show()
+          $('#copies_repot_idvi tbody tr').remove();
+          var i = 1
+          resp['data'].forEach(function(item){
+            var day = moment(item.start).format('DD-MMM-YYYY');
+            var day_count = moment(item.start).format('DD-MM-YYYY');
+            $('#copies_repot_idvi').append('<tr><td data-sort="'+day_count+'">'+day+'</td><td>'+item.title+'</td></tr>');
+          })
+          $('#copies_repot_idvi').DataTable( {
+              dom: 'Bfrtip',
+              buttons: [
+                  'excel'
+              ],
+              "aoColumns": [
+                  { "sType": "date-uk" },
+                  null
+              ]
+          } );
+          $('.loader-div').hide()
+        }
+      });
+    }
+    function call_request_filter(data_v){
+      data_v.csrfmiddlewaretoken = '{{ csrf_token }}';
+      $.ajax({
+        type: "POST",
+        url: "/dash/number-copies/",
+        data: data_v,
+        success: function (resp) {
+          cal_data = resp['data'];
+          $("#calendar_past").html("");
+          $("#calendar").html("");
+          callCalender();
+          pastCallCalender();
+          $('.loader-div').hide()
+        }
+      });
+    }
+
+  callCalender();
+  function callCalender () {
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+    function ini_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        }
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject)
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex        : 1070,
+          revert        : true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        })
+
+      })
+    }
+
+    ini_events($('#external-events div.external-event'))
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date()
+    var d    = date.getDate(),
+        m    = date.getMonth(),
+        y    = date.getFullYear()
+
+    var Calendar = FullCalendar.Calendar;
+    var Draggable = FullCalendarInteraction.Draggable;
+
+    var containerEl = document.getElementById('external-events');
+    var checkbox = document.getElementById('drop-remove');
+    var calendarEl = document.getElementById('calendar_past');
+
+    // initialize the external events
+    // -----------------------------------------------------------------
+
+   // new Draggable(containerEl, {
+     // itemSelector: '.external-event',
+      //eventData: function(eventEl) {
+        //console.log(eventEl);
+        //return {
+          //title: eventEl.innerText,
+          //backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          //borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          //textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
+        //};
+      //}
+    //});
+    var calendar = new Calendar(calendarEl, {
+      plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
+      header    : {
+        left  : '',
+        center: 'title',
+        //right : 'dayGridMonth,timeGridWeek,timeGridDay'
+        right : ''
+      },
+      'themeSystem': 'bootstrap',
+      //Random default events
+      events    : cal_data,
+      editable  : false,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
+      month:2,
+      drop      : function(info) {
+        // is the "remove after drop" checkbox checked?
+        //if (checkbox.checked) {
+          // if so, remove the element from the "Draggable Events" list
+          //info.draggedEl.parentNode.removeChild(info.draggedEl);
+        //}
+      }    
+    });
+
+    calendar.render();
+     //$('#calendar_past').fullCalendar()
+
+    /* ADDING EVENTS */
+    var currColor = '#3c8dbc' //Red by default
+    //Color chooser button
+    var colorChooser = $('#color-chooser-btn')
+    $('#color-chooser > li > a').click(function (e) {
+      e.preventDefault()
+      //Save color
+      currColor = $(this).css('color')
+      //Add color effect to button
+      $('#add-new-event').css({
+        'background-color': currColor,
+        'border-color'    : currColor
+      })
+    })
+    $('#add-new-event').click(function (e) {
+      e.preventDefault()
+      //Get value and make sure it is not null
+      var val = $('#new-event').val()
+      if (val.length == 0) {
+        return
+      }
+
+      //Create events
+      var event = $('<div />')
+      event.css({
+        'background-color': currColor,
+        'border-color'    : currColor,
+        'color'           : '#fff'
+      }).addClass('external-event')
+      event.html(val)
+      $('#external-events').prepend(event)
+
+      //Add draggable funtionality
+      ini_events(event)
+
+      //Remove event from text input
+      //$('#new-event').val('')
+    })
+  }
+
+
+
+
+
+
+  pastCallCalender()
+  function pastCallCalender() {
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+    function ini_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        }
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject)
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex        : 1070,
+          revert        : true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        })
+
+      })
+    }
+
+    ini_events($('#external-events div.external-event'))
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    var date = new Date()
+    var d    = date.getDate(),
+        m    = date.getMonth(),
+        y    = date.getFullYear()
+
+    var Calendar = FullCalendar.Calendar;
+    var Draggable = FullCalendarInteraction.Draggable;
+
+    var containerEl = document.getElementById('external-events');
+    var checkbox = document.getElementById('drop-remove');
+    var calendarEl = document.getElementById('calendar');
+
+    // initialize the external events
+    // -----------------------------------------------------------------
+
+   // new Draggable(containerEl, {
+     // itemSelector: '.external-event',
+      //eventData: function(eventEl) {
+        //console.log(eventEl);
+        //return {
+          //title: eventEl.innerText,
+          //backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          //borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
+          //textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
+        //};
+      //}
+    //});
+    var calendar = new Calendar(calendarEl, {
+      plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid' ],
+      header    : {
+        left  : 'prev,next',
+        center: 'title',
+        //right : 'dayGridMonth,timeGridWeek,timeGridDay'
+        right : '',
+        month: 2,
+      },
+      validRange: {
+        end: moment().endOf('month').format('YYYY-MM-DD')
+      },
+      defaultDate: moment().subtract(1, 'month').format('YYYY-MM-DD'),
+      'themeSystem': 'bootstrap',
+      //Random default events
+      events    : cal_data,
+      editable  : false,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
+      drop      : function(info) {
+        // is the "remove after drop" checkbox checked?
+        //if (checkbox.checked) {
+          // if so, remove the element from the "Draggable Events" list
+          //info.draggedEl.parentNode.removeChild(info.draggedEl);
+        //}
+      }    
+    });
+
+    calendar.render();
+    // $('#calendar').fullCalendar('prev')
+
+    /* ADDING EVENTS */
+    var currColor = '#3c8dbc' //Red by default
+    //Color chooser button
+    var colorChooser = $('#color-chooser-btn')
+    $('#color-chooser > li > a').click(function (e) {
+      e.preventDefault()
+      //Save color
+      currColor = $(this).css('color')
+      //Add color effect to button
+      $('#add-new-event').css({
+        'background-color': currColor,
+        'border-color'    : currColor
+      })
+    })
+    $('#add-new-event').click(function (e) {
+      e.preventDefault()
+      //Get value and make sure it is not null
+      var val = $('#new-event').val()
+      if (val.length == 0) {
+        return
+      }
+
+      //Create events
+      var event = $('<div />')
+      event.css({
+        'background-color': currColor,
+        'border-color'    : currColor,
+        'color'           : '#fff'
+      }).addClass('external-event')
+      event.html(val)
+      $('#external-events').prepend(event)
+
+      //Add draggable funtionality
+      ini_events(event)
+
+      //Remove event from text input
+      //$('#new-event').val('')
+    })
+  }
+</script>
+<style>
+td.alert.alert-info.fc-day-top.fc-today {
+    color: #212529;
+}
+td.fc-day.fc-today.alert.alert-info {
+  background: #ed23244a;
+}
+div#copy-model {
+    max-width: 650px;
+}
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number{
+  float: inherit;
+}
+td.fc-day-top{
+  text-align:center;
+}
+.fc-bootstrap a.fc-event:not([href]):not([tabindex]) {
+    color: #95989A;
+    background: transparent;
+    font-size: 16px;
+    border-color: transparent;
+}
+.fc-day-number {
+    font-size: 18px;
+}
+tr:first-child>td>.fc-day-grid-event {
+    margin-top: 5px;
+}
+.fc-scroller {
+  height: auto !important;
+}
+.fc-head-container {
+    border-bottom-width: 2px;
+    background: #f3f3f3;
+    padding: 4px 0px !important;
+    text-transform: uppercase;
+}
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+}
+.daterangepicker {
+    direction: ltr;
+    text-align: left;
+    top: 425px !important;
+    right: 24px !important;
+}
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 480px;
+    overflow-y: auto;
+}
+</style>
+
+
+
+</body>
+</html>

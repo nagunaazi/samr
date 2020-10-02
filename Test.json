@@ -1,0 +1,201 @@
+{
+    
+    "state_id": 1,
+    "unit_id": 2,
+    "city_id": 1,
+    "location_id": 2,
+    "town_id": 1,
+    "pincode": "302017",
+    "population": "123456",
+    "tot_copies": 300,
+    "main_copies": 100,
+    "jj_copies": 200,
+    "city_upc": "City",
+    "reason": "Replacement",
+    "proposed_count": 2,
+    "status": 1,
+    "create_user": null,
+    "update_user": null,
+    "AgencyRequestReason_set": [
+        {
+            "reason": "Replacement",
+            "ag_code": "234567",
+            "ag_copies": 10,
+            "ag_reason": "Replacement AG Reson"
+        }
+    ],
+    "AgencyRequestAGDetail_set": [
+        {
+            "agenct_name": "TestAGent",
+            "agency_name": "TestAgency",
+            "final_status": null,
+            "AgencyRequestSurvey_set": [
+                {
+                    "tot_copies": 1,
+                    "cash_copies": 1,
+                    "subagenct_copies": 1,
+                    "vendor_copies": 1,
+                    "railway_copies": 1,
+                    "self_copies": 1,
+                    "UOH_meeting_flag": 1,
+                    "UOH_meeting_mode": "1",
+                    "uoh_meeting_remark": "1",
+                    "SOH_meeting_flag": 1,
+                    "SOH_meeting_mode": "1",
+                    "SOH_meeting_remark": "1",
+                    "AgencyRequestSurveyVillage_set": [
+                        {
+                            "village_name": "erwe",
+                            "village_copies": 1
+                        }
+                    ],
+                    "AgencyRequestSurveyTarget_set": [
+                        {
+                            "agency_name": "wqeqw",
+                            "agecy_code": "wqewqe",
+                            "cur_copies": 1,
+                            "month_one": 1,
+                            "month_two": 1,
+                            "month_three": 1
+                        },
+                        {
+                            "agency_name": "wqeqw",
+                            "agecy_code": "wqewqe",
+                            "cur_copies": 1,
+                            "month_one": 1,
+                            "month_two": 1,
+                            "month_three": 1
+                        }
+                    ]
+                }
+            ],
+            "AgencyRequestKYBP_set": [
+                {
+                    "ag_gender": "M",
+                    "first_name": "Fname",
+                    "middle_name": "MName",
+                    "last_name": "LName",
+                    "agency_name": "AgName",
+                    "resi_houseno": "12",
+                    "resi_building": "bbbb",
+                    "resi_street": "sss",
+                    "resi_city": 1,
+                    "resi_state": 1,
+                    "resi_pincode": "1234",
+                    "resi_mono": "98786756",
+                    "resi_watsup": "98787656",
+                    "resi_email": "asa@asasa",
+                    "busi_houseno": "121",
+                    "busi_building": "121",
+                    "busi_street": "121",
+                    "busi_city": 1,
+                    "busi_state": 1,
+                    "busi_pincode": "121",
+                    "busi_mono": "121",
+                    "busi_watsup": "121",
+                    "busi_email": "121",
+                    "ag_religion": "121",
+                    "ag_dob": null,
+                    "ag_maritial_id": 1,
+                    "spouse_name": "fsfasfa",
+                    "spouse_dob": null,
+                    "ag_marrige_ani": null,
+                    "no_of_children": 1,
+                    "father_name": "fsdfdsfadsf",
+                    "father_dob": null,
+                    "mother_name": "vsdsdaads",
+                    "mother_dob": null,
+                    "brother_name": "fdsfds",
+                    "brother_dob": null,
+                    "sister_name": "sdfdsafds",
+                    "sister_dob": null,
+                    "nominee_name": "asdfasd",
+                    "nominee_relation": "dsafdsf",
+                    "other_nespaper_count": 0,
+                    "bank_holder_name": "dsfsadf",
+                    "bank_acc_no": "asfdds",
+                    "bank_name_branch": "sdafsad",
+                    "bank_address": "sdaf",
+                    "bank_IFSC": "sdafds",
+                    "GSTIN": "dsfdsf",
+                    "ag_db_relative": 1,
+                    "db_gender": "M",
+                    "db_fullname": "rwqr",
+                    "db_empid": "qwrqwrqw",
+                    "db_dept": 1,
+                    "db_desig": 1,
+                    "db_relation": 1,
+                    "db_city": 1,
+                    "pan_no": "qwrqw",
+                    "pan_copy": null,
+                    "add_proof_type": 1,
+                    "add_proof_no": "qwqwwq",
+                    "add_proof_copy": null,
+                    "bank_copy_type": "wqrqw",
+                    "bank_copy": null,
+                    "Agency_Child_set": [
+                        {
+                            "child_name": "c1",
+                            "child_DOB": null,
+                            "child_education": 1,
+                            "child_gender": "M"
+                        }
+                    ],
+                    "Agency_OtherNewsPaper_set": [
+                        {
+                            "newspaper_id": 1
+                        }
+                    ]
+                }
+            ],
+            "AgencyRequestCIRReq_set": [
+                {
+                    "edition_count": 1,
+                    "start_date": null,
+                    "commission_per": "1.00",
+                    "commission_amt": "1.00",
+                    "asd_as_per_norms": "1.00",
+                    "asd_collected": "1.00",
+                    "cheque_count": 0,
+                    "asd_mode": "1",
+                    "asd_days": "1",
+                    "dropping_count": 1,
+                    "executive_code": "1",
+                    "executive_name": "1",
+                    "UOH_code": "1",
+                    "UOH_name": "1",
+                    "SOH_code": "1",
+                    "SOH_name": "1",
+                    "creation_comments": "1",
+                    "CirReqEdition_set": [
+                        {
+                            "edition_id": 1,
+                            "edition_copies": 1
+                        }
+                    ],
+                    "CirReqDropping_set": [
+                        {
+                            "dropping_id": 1,
+                            "route_id": 1,
+                            "contact_no": "121",
+                            "sub_agent_code": "1212",
+                            "sub_agent_name": "121",
+                            "sub_agent_contact_no": "121",
+                            "sub_agent_copies": 12,
+                            "self_copies": 12
+                        }
+                    ],
+                    "CirReqCheque_set": [
+                        {
+                            "cheque_mode": "dsad",
+                            "cheque_number": "asdsa",
+                            "cheque_date": null,
+                            "cheque_amt": "12.11",
+                            "cheque_bank": "sdfsd"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

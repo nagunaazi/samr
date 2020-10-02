@@ -1,0 +1,288 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+                    <a href="/dash/number-copies">
+                        {% else %}
+                        <a href="/dash/order_list_copy">
+                            {% endif %}
+                            <div class="small-box border-red dash-tile">
+                                <div class="inner d-flex align-items-center">
+                                    <div class="media">
+                                        <i class="d-flex mr-3 dash-icon fas fa-copy"></i>
+                                        <div class="media-body">
+                                            <div class="mt-0 text-black">Todays Copies</div>
+                                            <div class="f-34 text-blue w600">{{data.GrossCopy}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-box-footer date_change_copy">{{YTDData.todate}}</div>
+                            </div>
+                        </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+                    <a href="/dash/billing/">
+                        {% else %}
+                        <a href="/dash/order_list_billing/">
+                            {% endif %}
+                            <div class="small-box border-blue dash-tile">
+                                <div class="inner d-flex align-items-center">
+                                    <div class="media">
+                                        <i class="d-flex mr-3 dash-icon fas fa-file-invoice"></i>
+                                        <div class="media-body">
+                                            <div class="mt-0 text-black">Billing</div>
+
+                                            <div class="f-34 text-blue w600">₹ {{lastmonth_year_Bill_Amt}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-box-footer date_change_bill">{{lastmonth_year}}</div>
+
+                            </div>
+                        </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+                    <a href="/dash/ledger/">
+                        {% else %}
+                        <a href="/dash/order_list_outstanding/">
+                            {% endif %}
+                            <div class="small-box border-red dash-tile">
+                                <div class="inner d-flex align-items-center">
+                                    <div class="media">
+                                        <i class="d-flex mr-3 dash-icon fas fa-book"></i>
+                                        <div class="media-body">
+                                            <div class="mt-0 text-black">Ledger</div>
+                                            <div class="f-34 text-red w600">₹ {{data.OutStd}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-box-footer">Ledger</div>
+                            </div>
+                        </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="#">
+                        <div class="small-box border-green dash-tile">
+                            <div class="inner d-flex align-items-center">
+                                <div class="media">
+                                    <img class="d-flex mr-3" src='{% static "dist/img/copy.png"  %}'
+                                         alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <div class="mt-0 text-black">ASD</div>
+                                        <div class="f-34 text-green w600">₹ {{data.Asd}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-box-footer">ASD</div>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="#">
+                        <div class="small-box dash-tile ">
+                            <div class="inner d-flex align-items-center justify-content-center">
+                                <img src='{% static "dist/img/scheme.png" %}' class="img-fluid mx-auto d-block">
+                            </div>
+
+                            <div class="small-box-footer">Scheme</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="#">
+                        <div class="small-box dash-tile">
+                            <div class="inner d-flex align-items-center justify-content-center">
+                                <img src='{% static "dist/img/benefit.png" %}' class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="small-box-footer">Benefits</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="/dash/grievance">
+                        <div class="small-box dash-tile">
+                            <div class="inner d-flex align-items-center justify-content-center">
+                                <div class="row">
+                                    <div class="col-12"><img src='{% static "dist/img/gravience.png"  %}'
+                                                             class="img-fluid mx-auto d-block"></div>
+                                    <div class="col-12 pos-bottom">
+                                        <div class="row">
+                                            <div class="col-6"><span class="badge-warning badge badge-pill">{{Open_count}} Open</span>
+                                            </div>
+                                            <div class="col-6"><span class="badge-danger badge badge-pill">{{Closed_Count}} Close</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="small-box-footer">Grievance</div>
+
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="#">
+                        <div class="small-box dash-tile">
+                            <div class="inner d-flex align-items-center justify-content-center">
+                                <img src='{% static "dist/img/event.png"  %}' class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="small-box-footer">Special Days</div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="{% url 'misreport' %}">
+                        <div class="small-box dash-tile">
+                            <div class="inner d-flex align-items-center justify-content-center">
+                                <img src='{% static "dist/img/mis.png"  %}' width="50px" class="img-fluid mx-auto d-block">
+                            </div>
+                            <div class="small-box-footer">MIS Report</div>
+                        </div>
+                    </a>
+                </div>
+                <!-- ./col -->
+            </div>
+            <!-- /.row -->
+            <!-- Main row -->
+            {% if request.session.usermasterdetails.access_type_id == 'AG' %}
+            <div class="row">
+                <!-- Left col -->
+                <!-- BAR CHART -->
+                <div class="col-md-12">
+                    <div class="card card-success">
+                        <div class="card-header" style="background:#fff;">
+                            <h3 class="card-title" style="color:#000;">Copy Trend (Average)</h3>
+
+                            <div class="card-tools">
+
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChart"
+                                        style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- /.card -->
+                <!-- right col -->
+            </div>
+            {% endif %}
+            <!-- /.row (main row) -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% include "includes/footer.html" %}
+<script>
+   var date_txt = $('.date_change_copy').text();
+    chang_val = moment(date_txt).format('DD-MMM-YYYY')
+    $('.date_change_copy').text(chang_val);
+
+    var date_change_bill = $('.date_change_bill').text();
+    if(date_change_bill){
+      var mo = date_change_bill.split('-')
+      var new_mo = mo[1]+'-'+mo[0]+'-01'
+      chang_val_1 = moment(new_mo).format('MMM-YYYY')
+      $('.date_change_bill').text(chang_val_1);
+    }
+
+  $.widget.bridge('uibutton', $.ui.button)
+  
+  $(document).ready(function(){
+  $('ul li a').click(function(){
+    $('li a').removeClass("active");
+    $(this).addClass("active");
+});
+});
+  $(function () {
+
+        // Get context with jQuery - using jQuery's .get() metho
+     
+    var areaChartData = {
+      labels  : {{chart_date|safe}},
+      datasets: [
+        {
+          label               : '',
+          backgroundColor     : '#ed2324',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : true,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : {{chart_val}}
+        }
+      ]
+    }
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : true,
+      legend: {
+        "display": false
+      }
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar', 
+      data: barChartData,
+      options: barChartOptions
+    })
+  })
+
+
+</script>

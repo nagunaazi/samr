@@ -1,0 +1,121 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-4">
+            <h1 class="m-0 text-dark">Billing</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-4 text-center">
+            <h1 class="m-0 text-dark"><small class="today_date"></small></h1>
+          </div>
+          <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+              <li class="breadcrumb-item active">Billing</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content calender-body">
+      <div class="container-fluid">
+        
+        <!-- Main row -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body agent-list">
+                <div class="row">
+                  <div class="col-12 col-lg-12">
+                    <table id="order_repot_idvi" class="dark_head table table-striped table-bordered dataTable no-footer">
+                      <thead>
+                        <tr>
+                          <th style="width: 10%;">#</th>
+                          <th>{{request.GET.s}} {{page}}</th>
+                          <th>Value</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for res in data %}
+                        <tr>
+                          <td style="text-align: center;">
+                            {% if page == 'Agent' %}
+                              <img class="d-flex mr-3" src='{% static "dist/img/agency-admin.png" %}' alt="Generic placeholder image">
+                            {% else %}
+                              <img class="d-flex mr-3" src='{% static "dist/img/soh.png" %}' alt="Generic placeholder image">
+                            {% endif %}
+                          </td>
+                          <td>
+                            <h5 class="mt-2 f-20">{{res.name}}</h5>
+                          </td>
+                          <td class="justify-content-end align-items-center">
+                            {{res.val}}
+                          </td>
+                          <td>
+                              {% if page == 'Agent' %}
+                                <a class="btn theme-btn" style="padding: 0px 10px;" href="/dash/billing/?s={{res.id}}">
+                                  View <i class="fa fa-angle-right f-20"></i>
+                                </a>
+                              {% else %}
+                                <a class="btn theme-btn" style="padding: 0px 10px;" href="/dash/order_list_billing/?v={{page}}&s={{res.name}}">
+                                  View <i class="fa fa-angle-right f-20"></i>
+                                </a>
+                              {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include "includes/footer.html" %}
+  <script>
+    $(function(){
+      $(".today_date").text(moment().format("DD-MMM-YYYY"))
+
+      $('#order_repot_idvi').DataTable( {
+              dom: 'lBfrtip',
+              buttons: [
+                  {
+                      extend: 'excel',
+                      footer: true,
+                      exportOptions: {
+                            columns: [1,2]
+                        }
+                  }
+              ],
+              "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]
+          } );
+    })
+  </script>
+  <style>
+    #order_repot_idvi_length{
+      position: relative;
+      float: left;
+      width: 18%;
+    }
+    #order_repot_idvi_length label select{
+      width: 45%;
+      display: inline-block;
+    }
+  </style>

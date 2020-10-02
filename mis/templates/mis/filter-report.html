@@ -1,0 +1,11 @@
+<div class="unit-data my-3">
+    <h4>Unit</h4>
+    <div id="unitlist">
+        {% for unit in units %}
+        <span><input type="checkbox" name="unitid" class="chekboxs" value="{{unit.pk}}" checked onclick="getCity(this)"> {{ unit.unit_code}}</span>
+        {% endfor%}
+
+    </div>
+</div>
+
+

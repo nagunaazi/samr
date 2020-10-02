@@ -1,0 +1,545 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+<style>
+    .tbl-font{
+    font-size:11px;
+    }
+    .text-color,.bg-danger{
+    background-color: #ED2324 !important;
+    }
+
+
+.chekboxs {
+    width:20px;
+    height:20px;
+    background-color: red;
+    vertical-align: middle;
+}
+#listResults .checkbox-yellow input[type="checkbox"] + label::before
+{background-color: red;  border-color: red;}
+
+
+#listResults span{
+    margin:4px;
+}
+#listResults span input{
+    margin:4px;
+}
+#listResults{
+padding:0px;
+margin:0px;
+}
+
+.span-main{
+padding:16px;
+}
+.span-main h2{
+font-weight: 400;
+ line-height: revert;
+}
+
+</style>
+<script>
+
+
+</script>
+
+<div class="content-wrapper">
+<div class="container-fluid span-main">
+    <div class="row bg-light">
+        <div class="col-md-9 pr-0 bg-white p-4">
+            <h2 class="mt-4 mb-2 ml-0">MIS Report</h2>
+            <table class="table table-bordered table-responsive tbl-font">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                    <td></td>
+                    <td colspan="4">5 March</td>
+
+
+                    <td colspan="4">30 Jan</td>
+
+                    <td colspan="4">26 Aug</td>
+
+
+                    <td colspan="2">Diff From 5th Jan</td>
+                    <td colspan="2">Diff From 5th Jan</td>
+                    <td colspan="2">Diff From 13th Jul</td>
+                    <td colspan="2">Diff From 13th Jul</td>
+                    <td></td>
+
+                </tr>
+                <tr class="bg-danger text-white">
+                    <td>State</td>
+                    <td>Center</td>
+                    <td>City/UPC</td>
+                    <td>Main /II/</td>
+                    <td>Editors</td>
+                    <td>Cash/Credit</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+                    <td>UNSOLD</td>
+                    <td>Samping</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+                    <td>UNSOLD</td>
+                    <td>Samping</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+                    <td>UNSOLD</td>
+                    <td>Samping</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+
+                    <td>PO</td>
+                    <td>NPS</td>
+
+
+
+                    <td>Gross/Loss NPS FROM 30TH JAN</td>
+                </tr>
+
+                {% for i in "11"%}
+                <tr>
+                    <td rowspan="10"></td>
+                    <td rowspan="10" style="vertical-align: middle;">BHOP</td>
+                    <td rowspan="2" style="vertical-align: middle;">CITY</td>
+                    <td>MAIN</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+
+                    <td>II</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+
+                    <td colspan="2" align="center">City Total</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+
+                    <td rowspan="6">UPC</td>
+                    <td>VODHISHA</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+
+
+                    <td>GUNA</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+
+                    <td>SHIHORE</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+
+                    <td>Ragi.BY</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+
+                    <td>Rassin</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+
+
+                    <td>Ashok Nagar</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    {% endfor %}
+
+
+                    <td colspan="2" align="center">UPS TOTAL</td>
+                    <td></td>
+                    <td>Credit</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+
+            </table>
+            <div class="m-4"><a href="/dash" class="btn btn-danger"> Back</a></div>
+
+
+        </div>
+        <div class="col-md-3 bg-white p-4 shadow rounded-lg mt-2 border-" id="listResults">
+            <h2>Filter  <span class="float-right text-danger display-5"><i class="fas fa-filter"></i></span></h2>
+            <hr>
+            <h4>State</h4>
+            <div class="row">
+               {% for state in states %}
+            {% if state.state_code in "MP"%}
+            <div class="col-md-3 pr-0 mb-2 mt-2"><input type="checkbox" name="stateid" class="chekboxs" checked value="{{state.pk}}"
+                         data-id="{{state.pk}}" onload="getUnit(this)"
+                         onclick="getUnit(this)"> <span class="text-dark">{{ state.state_code}}</span></div>
+
+            {% else%}
+            <div class="col-md-3 pr-0 mb-2 mt-2"><input type="checkbox" name="stateid" class="chekboxs" value="{{state.pk}}"
+                         data-id="{{state.pk}}"
+                         onclick="getUnit(this)"> {{ state.state_code}}</div>
+            {%  endif %}
+            {% endfor%}
+
+
+            </div>
+
+
+            <div id="filter-data">
+                <div class="unit-data my-3">
+                    <h4>Unit</h4>
+                    <div id="unitlist">
+                        <div class="row">
+                        {% for unit in units %}
+                        <div class="col-md-4 pr-0 mb-2 mt-2"><input type="checkbox"  class="chekboxs" name="unitid" value="{{unit.pk}}" checked onclick="getCity(this)"> {{ unit.unit_code}}</div>
+                        {% endfor%}
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <hr>
+                <div class="cities-data my-3">
+
+                    <div id="citieslist">
+                        <div class="row">
+                        <div class="col-md-4 pr-0 mb-2 mt-2"><input type="checkbox" class="chekboxs" name="unitid" value="{{city.pk}}"
+                                     checked> City</div>
+                        <div class="col-md-4 pr-0 mb-2 mt-2"><input type="checkbox" class="chekboxs" name="unitid" value="{{city.pk}}"
+                                     checked> UPC</div>
+                        <div class="col-md-4 pr-0 mb-2 mt-2"><input type="checkbox" class="chekboxs" name="unitid" value="{{city.pk}}"
+                                     checked> Edition</div>
+                        <div class="col-md-8 pr-0 mb-2 mt-2"><input type="checkbox" class="chekboxs" name="unitid" value="{{city.pk}}"
+                                     checked> Base Copy</div>
+                            </div>
+                    </div>
+                </div>
+
+
+            <div class="bydate">
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type='date' class="form-control" placeholder="05-March 2020"/>
+                        <span class="input-group-addon">
+               <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+                    </div>
+                </div>
+            </div>
+                </div>
+                    </div>
+        </div>
+    </div>
+</div>
+</div>
+    <script type="text/javascript">
+         $(function () {
+             $('#datetimepicker2').datetimepicker({
+                 locale: 'ru'
+             });
+         });
+
+</script>
+<script>
+
+function getUnit(get_data){
+    State =[]
+    var Qdata =function(id,opt){
+        this.id =id;
+        this.opt =opt;
+    };
+    function addState(id,opt){
+        for(var i in State){
+            if (State[i].id==id){
+                State[i].opt =opt;
+                return;
+            }
+        }
+    var qdata = new Qdata(id,opt);
+    State.push(qdata);
+    }
+
+     $("#filter-data").html( '<i class="fas fa-spinner fa-spin mt-4 text-danger" style="font-size:40px; text-align:center;"></i>');
+    $('input[name="stateid"]:checked').each(function() {
+                debugger;
+            oid =this.value;
+            option =this.name;
+            addState(oid,option);
+
+        });
+     console.log(State);
+    $.ajax({
+        url:"/misreport/getUnit/",
+        type:"get",
+        contentType: 'application/json; charset=utf-8',
+        data: {'stateId': JSON.stringify(State)},
+        success:function(data){
+        $("#filter-data").html(data);
+        State=[];
+
+        }
+    });
+
+}
+
+
+
+
+</script>
+{% include "includes/footer.html" %}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

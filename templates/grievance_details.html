@@ -1,0 +1,144 @@
+{% load static %}
+{% include "includes/header.html" %}
+{% include "includes/sidebar.html" %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-8">
+            <h1 class="m-0 text-dark">Grievance Detail (<small>{{request.GET.n}}</small>)</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/dash/">Home</a></li>
+              <li class="breadcrumb-item active">Grievance Detail</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+        <!-- Main row -->
+        <div class="row">
+           <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card">
+              <div class="card-header">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-primary {% if request.GET.g == '2' %} active {% endif %}" onclick="reloadPage(2)">
+                    <input type="radio" name="options" id="option1" autocomplete="off" {% if request.GET.g == '2' %} checked {% endif %}> Open Complaints
+                  </label>
+                  <label class="btn btn-primary {% if request.GET.g == '3' %} active {% endif %}" onclick="reloadPage(3)">
+                    <input type="radio" name="options" id="option2" autocomplete="off" {% if request.GET.g == '3' %} checked {% endif %}> Close Complaints
+                  </label>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body agent-list">
+                <div class="row">
+                  <div class="col-12 col-lg-12" id="com_div">
+                    <h4>Your Complaints</h4>
+                    <table id="order_repot_idvi" class="dark_head table table-striped table-bordered dataTable no-footer">
+                      <thead>
+                        <tr>
+                          <th style="width: 10%;">#</th>
+                          <th>Category</th>
+                          <th>Complaints</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for da in data %}
+                        <tr class="append_div{{da.Incident_category_Code}}">
+                          <td style="text-align: center;">
+                              <i class="nav-icon fa fa-comment-alt"></i>
+                          </td>
+                          <td>
+                            <h5 class="mt-2 f-20">{{da.Incident_category_Text}}</h5>
+                          </td>
+                          <td class="justify-content-end align-items-center">
+                            {{da.Total_Incident}}
+                          </td>
+                          <td>
+                                <a class="btn theme-btn" onclick="getComplete({{da.Incident_category_Code}},'{{da.Incident_category_Text}}')" style="padding: 0px 10px;" href="javascript:">
+                                  View <i class="fa fa-angle-right f-20"></i>
+                                </a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+           
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  {% include "includes/footer.html" %}
+  <script>
+    function reloadPage(val){
+      $('.loader-div').show()
+       window.location = '/dash/grievance-details/?g='+val+'&s='+{{request.GET.s}}+'&n={{request.GET.n}}'
+    }
+
+    function getComplete(val,tit){
+      $('.loader-div').show()
+      var data = {}
+      data.BPCODE = "{{request.GET.s}}"
+      data.Status_CODE = "{{request.GET.g}}"
+      data.CATEGORY_CODE = val
+      data.csrfmiddlewaretoken = '{{ csrf_token }}';
+      // console.log(data)
+        $.ajax({
+          type: "POST",
+          url: "/dash/grievance-cat-complete/",
+          data: data, 
+          success: function (resp) {
+            $(".append_tr"+val).remove();
+            var Incidentlist = resp.data.Incidentlist
+            console.log(Incidentlist)
+            //$("#com_div").hide()
+            //$("#com_list_div").show()
+            var table_d = '<tr class="append_tr'+val+'"><td style="background:#f0f8ff; box-shadow: inset 0px 0px 3px;" colspan="4"><table style="width:100%;" id="" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'
+                table_d += '<tr><th>#</th><th>Complete</th><th>Date</th><th>Action</th></tr>'
+                Incidentlist.forEach(function(item){
+                  var date = item.fields.create_date
+                  var date = moment(date).format('DD-MMM-YYYY')
+                  table_d += '<tr><td style="text-align: center;"><i class="nav-icon fa fa-comment-alt"></i></td>'
+                  table_d += '<td>'+item.pk+ ' ' +item.fields.Incident_Text+'</td>'
+                  table_d += '<td>'+date+'</td>'
+                  table_d += '<td>Aya</td></tr>'
+                });
+            table_d += '</table></td></tr>'
+            $(table_d).insertAfter('.append_div'+val)
+            $(".title_com").text(tit)
+            if(data.status_code == 1){
+              toastr.success(data.reply,{timeOut: 800000})
+            }else{
+              toastr.error(data.reply,{timeOut: 800000})
+            }
+            $('.loader-div').hide()
+          }
+        });
+    }
+    
+  </script>
